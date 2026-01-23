@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cdc459b051874c55bf3564e775ca042, type: 3}
+  m_Name: CommonConfig
+  m_EditorClassIdentifier: 
+  <GroundLayer>k__BackingField:
+    serializedVersion: 2
+    m_Bits: 64
+  <MainHeroStartPosition>k__BackingField: {x: 0, y: 40, z: 0}
+  <EnemyesStartPositions>k__BackingField:
+  - {x: 34.5, y: 40, z: 19.4}
+  - {x: 17.6, y: 40, z: -22.3}
+  - {x: 33.3, y: 40, z: 11.1}
+  - {x: 11.6, y: 40, z: -1.6}
+  - {x: 36.1, y: 40, z: -36.5}
+  - {x: -11.8, y: 40, z: 1.8}
+  - {x: 10.4, y: 40, z: 28.7}
+  - {x: -22.6, y: 40, z: 31.2}
+  - {x: -12.5, y: 40, z: 12.1}
+  - {x: -33.2, y: 40, z: 2.8}
+  - {x: -9.2, y: 40, z: 31.9}
+  - {x: 24.3, y: 40, z: -0.9}
+  - {x: 29.9, y: 40, z: 24.2}
+  - {x: -18, y: 40, z: -28.1}
+  - {x: 26.6, y: 40, z: -28}
+  - {x: 3.1, y: 40, z: -1.3}
+  - {x: 0, y: 40, z: -29.1}
+  - {x: -39, y: 40, z: 33.9}
+  - {x: 27.9, y: 40, z: -14.1}
+  - {x: 17.1, y: 40, z: -27}
+  - {x: -35.1, y: 40, z: -25.4}
+  <TimeForSpawnEnemy>k__BackingField: 5
