@@ -39,11 +39,11 @@ public class Bootstrap : MonoBehaviour
         _controllersFactory = new ControllersFactory();
         _charactersFactory = new CharactersFactory();
 
-        ReactiveList<Character> reactiveList = new ReactiveList<Character>();
+        ReactiveList<Character> enemyesList = new ReactiveList<Character>();
 
         _enemySpawner = new EnemySpawner(
             this,
-            reactiveList,
+            enemyesList,
             enemyConfig,
             touchConfig,
             _controllersFactory,
@@ -63,7 +63,7 @@ public class Bootstrap : MonoBehaviour
             _cinemachine,
             _confirmPopup,
             gamePlayConditionsConfig,
-            reactiveList,
+            enemyesList,
             _enemySpawner
             );
 

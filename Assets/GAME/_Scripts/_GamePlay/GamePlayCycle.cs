@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GamePlayCycle : IDisposable
 {
+    private readonly KeyCode FKeyCod = KeyCode.F;
+
     private MonoBehaviour _context;
 
     private Character _player;
@@ -21,7 +23,7 @@ public class GamePlayCycle : IDisposable
 
     private GameMode _gameMode;
     private GamePlayConditionsConfig _gamePlayConditionsConfig;
-    private ReactiveList<Character> _reactiveList;
+    private ReactiveList<Character> _enemyesList;
     private EnemySpawner _enemySpawner;
 
     public GamePlayCycle(
@@ -48,7 +50,7 @@ public class GamePlayCycle : IDisposable
         _cinemachine = cinemachine;
         _confirmPopup = confirmPopup;
         _gamePlayConditionsConfig = gamePlayConditionsConfig;
-        _reactiveList = reactiveList;
+        _enemyesList = reactiveList;
         _enemySpawner = enemySpawner;
     }
 
@@ -66,10 +68,10 @@ public class GamePlayCycle : IDisposable
     public IEnumerator Launch()
     {
         _confirmPopup.Show();
-        _confirmPopup.SetText($"Нажмите {KeyCode.F.ToString()} для продолжения.");
+        _confirmPopup.SetText($"Нажмите {FKeyCod.ToString()} для продолжения.");
         _enemySpawner.StopSpawnProcces();
 
-        yield return _confirmPopup.WaitConfirm(KeyCode.F);
+        yield return _confirmPopup.WaitConfirm(FKeyCod);
 
         _confirmPopup.Hide();
 
@@ -79,14 +81,12 @@ public class GamePlayCycle : IDisposable
         GamePlayConditionsFactory gamePlayConditionsController = new GamePlayConditionsFactory(
             _gamePlayConditionsConfig,
             _context,
-            _reactiveList,
+            _enemyesList,
             _player);
 
         _gameMode = new GameMode(
             gamePlayConditionsController.CreateWinCondition(),
-            gamePlayConditionsController.CreateDefeatCondition(),
-            _reactiveList,
-            _enemySpawner);
+            gamePlayConditionsController.CreateDefeatCondition());
 
         _enemySpawner.SpawnOnStart();
 
@@ -122,6 +122,14 @@ public class GamePlayCycle : IDisposable
 
     private void EndGameProcess()
     {
+        if (_enemyesList != null)
+            foreach (var enemy in _enemyesList.List)
+                GameObject.Destroy(enemy.gameObject);
+
+        _enemySpawner?.StopSpawnProcces();
+
+        _enemyesList.Clear();
+
         Dispose();
         _context.StartCoroutine(Launch());
     }

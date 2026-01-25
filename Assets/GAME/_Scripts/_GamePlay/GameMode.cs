@@ -1,5 +1,4 @@
 using System;
-using UnityEngine;
 
 public class GameMode : IDisposable
 {
@@ -9,22 +8,12 @@ public class GameMode : IDisposable
     private IGameCondition _winCondition;
     private IGameCondition _defeatCondition;
 
-    private ReactiveList<Character> _reactiveList;
-
-    private EnemySpawner _enemySpawner;
-
     public GameMode(
         IGameCondition winCondition,
-        IGameCondition defeatCondition,
-        ReactiveList<Character> reactiveList,
-        EnemySpawner enemySpawner)
+        IGameCondition defeatCondition)
     {
         _winCondition = winCondition;
         _defeatCondition = defeatCondition;
-
-        _reactiveList = reactiveList;
-
-        _enemySpawner = enemySpawner;
     }
 
     public void Start()
@@ -49,25 +38,12 @@ public class GameMode : IDisposable
     private void Win()
     {
         IsWined?.Invoke();
-        EndGameProcess();
+        Dispose();
     }
 
     private void Loose()
     {
         IsDefeated?.Invoke();
-        EndGameProcess();
-    }
-
-    private void EndGameProcess()
-    {
-        if (_reactiveList != null)
-            foreach (var enemy in _reactiveList.List)
-                GameObject.Destroy(enemy.gameObject);
-
-        _enemySpawner?.StopSpawnProcces();
-
-        _reactiveList.Clear();
-
         Dispose();
     }
 }
